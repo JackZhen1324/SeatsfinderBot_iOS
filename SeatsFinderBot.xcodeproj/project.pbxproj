@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1215618966F034A9C93A4875 /* Pods_SeatsFinderBotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E1F3CDDD9280BC4F343A0B /* Pods_SeatsFinderBotTests.framework */; };
+		6F03458B2287CC0D00CDE81C /* overViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F03458A2287CC0D00CDE81C /* overViewController.swift */; };
+		6F03458E2288174600CDE81C /* courseMonitorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F03458D2288174600CDE81C /* courseMonitorCellTableViewCell.swift */; };
+		6F0B7D57228BD076009D0B07 /* extentionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0B7D56228BD076009D0B07 /* extentionUIView.swift */; };
 		6F1F64732282DBAE00CA9505 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F64722282DBAE00CA9505 /* AppDelegate.swift */; };
 		6F1F64752282DBAE00CA9505 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F64742282DBAE00CA9505 /* ViewController.swift */; };
 		6F1F64782282DBAE00CA9505 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F64762282DBAE00CA9505 /* Main.storyboard */; };
@@ -15,6 +19,11 @@
 		6F1F64802282DBB000CA9505 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F647E2282DBB000CA9505 /* LaunchScreen.storyboard */; };
 		6F1F648B2282DBB000CA9505 /* SeatsFinderBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F648A2282DBB000CA9505 /* SeatsFinderBotTests.swift */; };
 		6F1F64962282DBB000CA9505 /* SeatsFinderBotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F64952282DBB000CA9505 /* SeatsFinderBotUITests.swift */; };
+		6F8797FC2283FACF0014E2E5 /* courseInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8797FB2283FACF0014E2E5 /* courseInfoCell.swift */; };
+		6F8797FE228540D00014E2E5 /* mainPageControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8797FD228540D00014E2E5 /* mainPageControllerViewController.swift */; };
+		6F879800228541750014E2E5 /* setingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8797FF228541750014E2E5 /* setingPageController.swift */; };
+		C20B03FE8C9B7A888A986036 /* Pods_SeatsFinderBotUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF5E14F9B4219BC92F663F91 /* Pods_SeatsFinderBotUITests.framework */; };
+		ECC9040D37C89DF5BF6B9B6A /* Pods_SeatsFinderBot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0433FD088BEE08EC84A5C303 /* Pods_SeatsFinderBot.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +44,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01E682D3D58BAD9310238516 /* Pods-SeatsFinderBotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeatsFinderBotTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeatsFinderBotTests/Pods-SeatsFinderBotTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0433FD088BEE08EC84A5C303 /* Pods_SeatsFinderBot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeatsFinderBot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22E1F3CDDD9280BC4F343A0B /* Pods_SeatsFinderBotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeatsFinderBotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24D1C4BCA395684C00F05855 /* Pods-SeatsFinderBot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeatsFinderBot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeatsFinderBot/Pods-SeatsFinderBot.debug.xcconfig"; sourceTree = "<group>"; };
+		56B864F8D5A4AAA0F4E39423 /* Pods-SeatsFinderBot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeatsFinderBot.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeatsFinderBot/Pods-SeatsFinderBot.release.xcconfig"; sourceTree = "<group>"; };
+		6F03458A2287CC0D00CDE81C /* overViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overViewController.swift; sourceTree = "<group>"; };
+		6F03458D2288174600CDE81C /* courseMonitorCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseMonitorCellTableViewCell.swift; sourceTree = "<group>"; };
+		6F0B7D56228BD076009D0B07 /* extentionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionUIView.swift; sourceTree = "<group>"; };
 		6F1F646F2282DBAE00CA9505 /* SeatsFinderBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeatsFinderBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1F64722282DBAE00CA9505 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F1F64742282DBAE00CA9505 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +66,13 @@
 		6F1F64912282DBB000CA9505 /* SeatsFinderBotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeatsFinderBotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1F64952282DBB000CA9505 /* SeatsFinderBotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatsFinderBotUITests.swift; sourceTree = "<group>"; };
 		6F1F64972282DBB000CA9505 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F8797FB2283FACF0014E2E5 /* courseInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseInfoCell.swift; sourceTree = "<group>"; };
+		6F8797FD228540D00014E2E5 /* mainPageControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainPageControllerViewController.swift; sourceTree = "<group>"; };
+		6F8797FF228541750014E2E5 /* setingPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setingPageController.swift; sourceTree = "<group>"; };
+		B1368AFF616F6483ACE95C82 /* Pods-SeatsFinderBotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeatsFinderBotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeatsFinderBotTests/Pods-SeatsFinderBotTests.release.xcconfig"; sourceTree = "<group>"; };
+		DF5E14F9B4219BC92F663F91 /* Pods_SeatsFinderBotUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeatsFinderBotUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2D4B38362E5B50848B798F7 /* Pods-SeatsFinderBotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeatsFinderBotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeatsFinderBotUITests/Pods-SeatsFinderBotUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FB86665301FEB8CB59D38962 /* Pods-SeatsFinderBotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeatsFinderBotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeatsFinderBotUITests/Pods-SeatsFinderBotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECC9040D37C89DF5BF6B9B6A /* Pods_SeatsFinderBot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1215618966F034A9C93A4875 /* Pods_SeatsFinderBotTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,19 +96,60 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C20B03FE8C9B7A888A986036 /* Pods_SeatsFinderBotUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09AA11F6410EE0EB5F9F9B4C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0433FD088BEE08EC84A5C303 /* Pods_SeatsFinderBot.framework */,
+				22E1F3CDDD9280BC4F343A0B /* Pods_SeatsFinderBotTests.framework */,
+				DF5E14F9B4219BC92F663F91 /* Pods_SeatsFinderBotUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F0345892287CBE600CDE81C /* courseOverview */ = {
+			isa = PBXGroup;
+			children = (
+				6F03458A2287CC0D00CDE81C /* overViewController.swift */,
+				6F0B7D56228BD076009D0B07 /* extentionUIView.swift */,
+			);
+			path = courseOverview;
+			sourceTree = "<group>";
+		};
+		6F03458C228816FD00CDE81C /* mainPageView */ = {
+			isa = PBXGroup;
+			children = (
+				6F8797FD228540D00014E2E5 /* mainPageControllerViewController.swift */,
+				6F03458D2288174600CDE81C /* courseMonitorCellTableViewCell.swift */,
+			);
+			path = mainPageView;
+			sourceTree = "<group>";
+		};
+		6F03458F2289747500CDE81C /* courseSearchView */ = {
+			isa = PBXGroup;
+			children = (
+				6F1F64742282DBAE00CA9505 /* ViewController.swift */,
+				6F8797FB2283FACF0014E2E5 /* courseInfoCell.swift */,
+			);
+			path = courseSearchView;
+			sourceTree = "<group>";
+		};
 		6F1F64662282DBAE00CA9505 = {
 			isa = PBXGroup;
 			children = (
+				6F03458F2289747500CDE81C /* courseSearchView */,
 				6F1F64712282DBAE00CA9505 /* SeatsFinderBot */,
 				6F1F64892282DBB000CA9505 /* SeatsFinderBotTests */,
 				6F1F64942282DBB000CA9505 /* SeatsFinderBotUITests */,
 				6F1F64702282DBAE00CA9505 /* Products */,
+				8DB06C2DF221AED19A9DFF81 /* Pods */,
+				09AA11F6410EE0EB5F9F9B4C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,8 +166,10 @@
 		6F1F64712282DBAE00CA9505 /* SeatsFinderBot */ = {
 			isa = PBXGroup;
 			children = (
+				6F03458C228816FD00CDE81C /* mainPageView */,
+				6F0345892287CBE600CDE81C /* courseOverview */,
+				6F8797FF228541750014E2E5 /* setingPageController.swift */,
 				6F1F64722282DBAE00CA9505 /* AppDelegate.swift */,
-				6F1F64742282DBAE00CA9505 /* ViewController.swift */,
 				6F1F64762282DBAE00CA9505 /* Main.storyboard */,
 				6F1F647C2282DBB000CA9505 /* Assets.xcassets */,
 				6F1F647E2282DBB000CA9505 /* LaunchScreen.storyboard */,
@@ -128,6 +197,19 @@
 			path = SeatsFinderBotUITests;
 			sourceTree = "<group>";
 		};
+		8DB06C2DF221AED19A9DFF81 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				24D1C4BCA395684C00F05855 /* Pods-SeatsFinderBot.debug.xcconfig */,
+				56B864F8D5A4AAA0F4E39423 /* Pods-SeatsFinderBot.release.xcconfig */,
+				01E682D3D58BAD9310238516 /* Pods-SeatsFinderBotTests.debug.xcconfig */,
+				B1368AFF616F6483ACE95C82 /* Pods-SeatsFinderBotTests.release.xcconfig */,
+				FB86665301FEB8CB59D38962 /* Pods-SeatsFinderBotUITests.debug.xcconfig */,
+				E2D4B38362E5B50848B798F7 /* Pods-SeatsFinderBotUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +217,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F1F649A2282DBB000CA9505 /* Build configuration list for PBXNativeTarget "SeatsFinderBot" */;
 			buildPhases = (
+				4D48F347370A6BFCE478E9CB /* [CP] Check Pods Manifest.lock */,
 				6F1F646B2282DBAE00CA9505 /* Sources */,
 				6F1F646C2282DBAE00CA9505 /* Frameworks */,
 				6F1F646D2282DBAE00CA9505 /* Resources */,
+				E59802E9470454C4935BFE8B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -152,6 +236,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F1F649D2282DBB000CA9505 /* Build configuration list for PBXNativeTarget "SeatsFinderBotTests" */;
 			buildPhases = (
+				54A49E7FBFC4DF147FBB55BB /* [CP] Check Pods Manifest.lock */,
 				6F1F64822282DBB000CA9505 /* Sources */,
 				6F1F64832282DBB000CA9505 /* Frameworks */,
 				6F1F64842282DBB000CA9505 /* Resources */,
@@ -170,6 +255,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F1F64A02282DBB000CA9505 /* Build configuration list for PBXNativeTarget "SeatsFinderBotUITests" */;
 			buildPhases = (
+				EC8311BDE86941591DB462C4 /* [CP] Check Pods Manifest.lock */,
 				6F1F648D2282DBB000CA9505 /* Sources */,
 				6F1F648E2282DBB000CA9505 /* Frameworks */,
 				6F1F648F2282DBB000CA9505 /* Resources */,
@@ -254,14 +340,113 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4D48F347370A6BFCE478E9CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SeatsFinderBot-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		54A49E7FBFC4DF147FBB55BB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SeatsFinderBotTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E59802E9470454C4935BFE8B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SeatsFinderBot/Pods-SeatsFinderBot-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SeatsFinderBot/Pods-SeatsFinderBot-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC8311BDE86941591DB462C4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SeatsFinderBotUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6F1F646B2282DBAE00CA9505 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F879800228541750014E2E5 /* setingPageController.swift in Sources */,
+				6F8797FE228540D00014E2E5 /* mainPageControllerViewController.swift in Sources */,
 				6F1F64752282DBAE00CA9505 /* ViewController.swift in Sources */,
+				6F03458E2288174600CDE81C /* courseMonitorCellTableViewCell.swift in Sources */,
+				6F8797FC2283FACF0014E2E5 /* courseInfoCell.swift in Sources */,
+				6F0B7D57228BD076009D0B07 /* extentionUIView.swift in Sources */,
 				6F1F64732282DBAE00CA9505 /* AppDelegate.swift in Sources */,
 				6F1F647B2282DBAE00CA9505 /* SeatsFinderBot.xcdatamodeld in Sources */,
+				6F03458B2287CC0D00CDE81C /* overViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,11 +619,13 @@
 		};
 		6F1F649B2282DBB000CA9505 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24D1C4BCA395684C00F05855 /* Pods-SeatsFinderBot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K4F68P9JL;
 				INFOPLIST_FILE = SeatsFinderBot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,11 +639,13 @@
 		};
 		6F1F649C2282DBB000CA9505 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56B864F8D5A4AAA0F4E39423 /* Pods-SeatsFinderBot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K4F68P9JL;
 				INFOPLIST_FILE = SeatsFinderBot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -470,6 +659,7 @@
 		};
 		6F1F649E2282DBB000CA9505 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01E682D3D58BAD9310238516 /* Pods-SeatsFinderBotTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -491,6 +681,7 @@
 		};
 		6F1F649F2282DBB000CA9505 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1368AFF616F6483ACE95C82 /* Pods-SeatsFinderBotTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -512,6 +703,7 @@
 		};
 		6F1F64A12282DBB000CA9505 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB86665301FEB8CB59D38962 /* Pods-SeatsFinderBotUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -532,6 +724,7 @@
 		};
 		6F1F64A22282DBB000CA9505 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E2D4B38362E5B50848B798F7 /* Pods-SeatsFinderBotUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
