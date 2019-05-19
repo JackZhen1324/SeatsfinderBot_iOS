@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>427671677247-c45kram99nd9aocrg1km04rh2h6t4vft.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.427671677247-c45kram99nd9aocrg1km04rh2h6t4vft</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB67UysP1J_3W-a0yYBzQ6wdPRC87BPz4A</string>
+	<key>GCM_SENDER_ID</key>
+	<string>427671677247</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ASU.SeatsFinderBot</string>
+	<key>PROJECT_ID</key>
+	<string>seatsfinderbot</string>
+	<key>STORAGE_BUCKET</key>
+	<string>seatsfinderbot.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:427671677247:ios:ef3966c79491b92b</string>
+	<key>DATABASE_URL</key>
+	<string>https://seatsfinderbot.firebaseio.com</string>
+</dict>
+</plist>

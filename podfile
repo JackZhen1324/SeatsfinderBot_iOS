@@ -6,6 +6,9 @@ target 'SeatsFinderBot' do
   use_frameworks!
 pod 'Alamofire'
 pod 'Kanna'
+pod 'Firebase/Core'
+pod 'Firebase/Database'
+pod 'SwiftyJSON'
   # Pods for SeatsFinderBot
 
 

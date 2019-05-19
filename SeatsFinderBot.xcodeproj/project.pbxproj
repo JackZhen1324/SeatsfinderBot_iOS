@@ -19,6 +19,14 @@
 		6F1F64802282DBB000CA9505 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F647E2282DBB000CA9505 /* LaunchScreen.storyboard */; };
 		6F1F648B2282DBB000CA9505 /* SeatsFinderBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F648A2282DBB000CA9505 /* SeatsFinderBotTests.swift */; };
 		6F1F64962282DBB000CA9505 /* SeatsFinderBotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F64952282DBB000CA9505 /* SeatsFinderBotUITests.swift */; };
+		6F481B06228E7AC500FF10FC /* logtableCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F481B05228E7AC500FF10FC /* logtableCellTableViewCell.swift */; };
+		6F504FDD228D0005000A3FD5 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F504FDC228D0005000A3FD5 /* LogViewController.swift */; };
+		6F504FE0228D05B2000A3FD5 /* rootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F504FDF228D05B2000A3FD5 /* rootViewController.swift */; };
+		6F504FE2228D0817000A3FD5 /* mainSplitViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F504FE1228D0817000A3FD5 /* mainSplitViewViewController.swift */; };
+		6F504FEB228DD17D000A3FD5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F504FEA228DD17D000A3FD5 /* GoogleService-Info.plist */; };
+		6F53C95222917E8B00212AED /* registerViewcontrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53C95122917E8B00212AED /* registerViewcontrollerViewController.swift */; };
+		6F53C9562291B44D00212AED /* accountChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53C9552291B44D00212AED /* accountChangeView.swift */; };
+		6F53C9592291BBCA00212AED /* privacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53C9582291BBCA00212AED /* privacyViewController.swift */; };
 		6F8797FC2283FACF0014E2E5 /* courseInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8797FB2283FACF0014E2E5 /* courseInfoCell.swift */; };
 		6F8797FE228540D00014E2E5 /* mainPageControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8797FD228540D00014E2E5 /* mainPageControllerViewController.swift */; };
 		6F879800228541750014E2E5 /* setingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8797FF228541750014E2E5 /* setingPageController.swift */; };
@@ -66,6 +74,15 @@
 		6F1F64912282DBB000CA9505 /* SeatsFinderBotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeatsFinderBotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1F64952282DBB000CA9505 /* SeatsFinderBotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatsFinderBotUITests.swift; sourceTree = "<group>"; };
 		6F1F64972282DBB000CA9505 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F481B05228E7AC500FF10FC /* logtableCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logtableCellTableViewCell.swift; sourceTree = "<group>"; };
+		6F481B072290344600FF10FC /* SeatsFinderBot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SeatsFinderBot.entitlements; path = SeatsFinderBot/SeatsFinderBot.entitlements; sourceTree = "<group>"; };
+		6F504FDC228D0005000A3FD5 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		6F504FDF228D05B2000A3FD5 /* rootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rootViewController.swift; sourceTree = "<group>"; };
+		6F504FE1228D0817000A3FD5 /* mainSplitViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainSplitViewViewController.swift; sourceTree = "<group>"; };
+		6F504FEA228DD17D000A3FD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6F53C95122917E8B00212AED /* registerViewcontrollerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerViewcontrollerViewController.swift; sourceTree = "<group>"; };
+		6F53C9552291B44D00212AED /* accountChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountChangeView.swift; sourceTree = "<group>"; };
+		6F53C9582291BBCA00212AED /* privacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = privacyViewController.swift; sourceTree = "<group>"; };
 		6F8797FB2283FACF0014E2E5 /* courseInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseInfoCell.swift; sourceTree = "<group>"; };
 		6F8797FD228540D00014E2E5 /* mainPageControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainPageControllerViewController.swift; sourceTree = "<group>"; };
 		6F8797FF228541750014E2E5 /* setingPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setingPageController.swift; sourceTree = "<group>"; };
@@ -125,8 +142,11 @@
 		6F03458C228816FD00CDE81C /* mainPageView */ = {
 			isa = PBXGroup;
 			children = (
+				6F504FEA228DD17D000A3FD5 /* GoogleService-Info.plist */,
 				6F8797FD228540D00014E2E5 /* mainPageControllerViewController.swift */,
 				6F03458D2288174600CDE81C /* courseMonitorCellTableViewCell.swift */,
+				6F504FE1228D0817000A3FD5 /* mainSplitViewViewController.swift */,
+				6F481B05228E7AC500FF10FC /* logtableCellTableViewCell.swift */,
 			);
 			path = mainPageView;
 			sourceTree = "<group>";
@@ -143,8 +163,22 @@
 		6F1F64662282DBAE00CA9505 = {
 			isa = PBXGroup;
 			children = (
+				6F53C9572291BBB100212AED /* privacyPage */,
+				6F53C9542291B42B00212AED /* changeAccountPage */,
+				6F53C95022917E6E00212AED /* registerPage */,
+				6F53C94C229162BC00212AED /* settingPage */,
+				6F481B072290344600FF10FC /* SeatsFinderBot.entitlements */,
+				6F03458C228816FD00CDE81C /* mainPageView */,
+				6F0345892287CBE600CDE81C /* courseOverview */,
+				6F1F64722282DBAE00CA9505 /* AppDelegate.swift */,
+				6F1F64762282DBAE00CA9505 /* Main.storyboard */,
+				6F1F647C2282DBB000CA9505 /* Assets.xcassets */,
+				6F1F647E2282DBB000CA9505 /* LaunchScreen.storyboard */,
+				6F1F64812282DBB000CA9505 /* Info.plist */,
+				6F1F64792282DBAE00CA9505 /* SeatsFinderBot.xcdatamodeld */,
+				6F504FDE228D0585000A3FD5 /* rootViewController */,
+				6F504FDB228CFFC8000A3FD5 /* logViewController */,
 				6F03458F2289747500CDE81C /* courseSearchView */,
-				6F1F64712282DBAE00CA9505 /* SeatsFinderBot */,
 				6F1F64892282DBB000CA9505 /* SeatsFinderBotTests */,
 				6F1F64942282DBB000CA9505 /* SeatsFinderBotUITests */,
 				6F1F64702282DBAE00CA9505 /* Products */,
@@ -163,22 +197,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6F1F64712282DBAE00CA9505 /* SeatsFinderBot */ = {
-			isa = PBXGroup;
-			children = (
-				6F03458C228816FD00CDE81C /* mainPageView */,
-				6F0345892287CBE600CDE81C /* courseOverview */,
-				6F8797FF228541750014E2E5 /* setingPageController.swift */,
-				6F1F64722282DBAE00CA9505 /* AppDelegate.swift */,
-				6F1F64762282DBAE00CA9505 /* Main.storyboard */,
-				6F1F647C2282DBB000CA9505 /* Assets.xcassets */,
-				6F1F647E2282DBB000CA9505 /* LaunchScreen.storyboard */,
-				6F1F64812282DBB000CA9505 /* Info.plist */,
-				6F1F64792282DBAE00CA9505 /* SeatsFinderBot.xcdatamodeld */,
-			);
-			path = SeatsFinderBot;
-			sourceTree = "<group>";
-		};
 		6F1F64892282DBB000CA9505 /* SeatsFinderBotTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +213,54 @@
 				6F1F64972282DBB000CA9505 /* Info.plist */,
 			);
 			path = SeatsFinderBotUITests;
+			sourceTree = "<group>";
+		};
+		6F504FDB228CFFC8000A3FD5 /* logViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F504FDC228D0005000A3FD5 /* LogViewController.swift */,
+			);
+			path = logViewController;
+			sourceTree = "<group>";
+		};
+		6F504FDE228D0585000A3FD5 /* rootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F504FDF228D05B2000A3FD5 /* rootViewController.swift */,
+			);
+			path = rootViewController;
+			sourceTree = "<group>";
+		};
+		6F53C94C229162BC00212AED /* settingPage */ = {
+			isa = PBXGroup;
+			children = (
+				6F8797FF228541750014E2E5 /* setingPageController.swift */,
+			);
+			path = settingPage;
+			sourceTree = "<group>";
+		};
+		6F53C95022917E6E00212AED /* registerPage */ = {
+			isa = PBXGroup;
+			children = (
+				6F53C95122917E8B00212AED /* registerViewcontrollerViewController.swift */,
+			);
+			path = registerPage;
+			sourceTree = "<group>";
+		};
+		6F53C9542291B42B00212AED /* changeAccountPage */ = {
+			isa = PBXGroup;
+			children = (
+				6F53C9552291B44D00212AED /* accountChangeView.swift */,
+			);
+			path = changeAccountPage;
+			sourceTree = "<group>";
+		};
+		6F53C9572291BBB100212AED /* privacyPage */ = {
+			isa = PBXGroup;
+			children = (
+				6F53C9582291BBCA00212AED /* privacyViewController.swift */,
+			);
+			path = privacyPage;
 			sourceTree = "<group>";
 		};
 		8DB06C2DF221AED19A9DFF81 /* Pods */ = {
@@ -282,6 +348,14 @@
 				TargetAttributes = {
 					6F1F646E2282DBAE00CA9505 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					6F1F64852282DBB000CA9505 = {
 						CreatedOnToolsVersion = 10.1;
@@ -318,6 +392,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F504FEB228DD17D000A3FD5 /* GoogleService-Info.plist in Resources */,
 				6F1F64802282DBB000CA9505 /* LaunchScreen.storyboard in Resources */,
 				6F1F647D2282DBB000CA9505 /* Assets.xcassets in Resources */,
 				6F1F64782282DBAE00CA9505 /* Main.storyboard in Resources */,
@@ -395,14 +470,22 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SeatsFinderBot/Pods-SeatsFinderBot-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -438,15 +521,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F53C95222917E8B00212AED /* registerViewcontrollerViewController.swift in Sources */,
 				6F879800228541750014E2E5 /* setingPageController.swift in Sources */,
+				6F504FDD228D0005000A3FD5 /* LogViewController.swift in Sources */,
+				6F53C9592291BBCA00212AED /* privacyViewController.swift in Sources */,
+				6F481B06228E7AC500FF10FC /* logtableCellTableViewCell.swift in Sources */,
 				6F8797FE228540D00014E2E5 /* mainPageControllerViewController.swift in Sources */,
 				6F1F64752282DBAE00CA9505 /* ViewController.swift in Sources */,
+				6F504FE0228D05B2000A3FD5 /* rootViewController.swift in Sources */,
 				6F03458E2288174600CDE81C /* courseMonitorCellTableViewCell.swift in Sources */,
 				6F8797FC2283FACF0014E2E5 /* courseInfoCell.swift in Sources */,
 				6F0B7D57228BD076009D0B07 /* extentionUIView.swift in Sources */,
 				6F1F64732282DBAE00CA9505 /* AppDelegate.swift in Sources */,
+				6F504FE2228D0817000A3FD5 /* mainSplitViewViewController.swift in Sources */,
 				6F1F647B2282DBAE00CA9505 /* SeatsFinderBot.xcdatamodeld in Sources */,
 				6F03458B2287CC0D00CDE81C /* overViewController.swift in Sources */,
+				6F53C9562291B44D00212AED /* accountChangeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,9 +712,10 @@
 			baseConfigurationReference = 24D1C4BCA395684C00F05855 /* Pods-SeatsFinderBot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SeatsFinderBot/SeatsFinderBot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K4F68P9JL;
-				INFOPLIST_FILE = SeatsFinderBot/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -642,9 +733,10 @@
 			baseConfigurationReference = 56B864F8D5A4AAA0F4E39423 /* Pods-SeatsFinderBot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SeatsFinderBot/SeatsFinderBot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K4F68P9JL;
-				INFOPLIST_FILE = SeatsFinderBot/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

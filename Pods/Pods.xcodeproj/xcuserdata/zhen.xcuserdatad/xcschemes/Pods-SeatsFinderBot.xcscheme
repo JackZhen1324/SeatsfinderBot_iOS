@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CE368D8DCBF2995EE7FF14F8DE6060AE"
+               BlueprintIdentifier = "92BDA03B2CA0BBF5BBA9E43165B587CB"
                BuildableName = "Pods_SeatsFinderBot.framework"
                BlueprintName = "Pods-SeatsFinderBot"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE368D8DCBF2995EE7FF14F8DE6060AE"
+            BlueprintIdentifier = "92BDA03B2CA0BBF5BBA9E43165B587CB"
             BuildableName = "Pods_SeatsFinderBot.framework"
             BlueprintName = "Pods-SeatsFinderBot"
             ReferencedContainer = "container:Pods.xcodeproj">
