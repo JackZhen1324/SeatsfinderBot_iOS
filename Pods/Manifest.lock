@@ -54,6 +54,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - Siren (3.4.3)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
@@ -61,6 +62,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Kanna
+  - Siren
   - SwiftyJSON
 
 SPEC REPOS:
@@ -76,6 +78,7 @@ SPEC REPOS:
     - Kanna
     - leveldb-library
     - nanopb
+    - Siren
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -90,8 +93,9 @@ SPEC CHECKSUMS:
   Kanna: 15569a2331b79782a1753cf280c8e69e2a033654
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Siren: e3cf1a93fa0fa73c03452107e95e5c10768d1d08
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 5d9842311ea46213f938b194d7b84f840d7fb13a
+PODFILE CHECKSUM: 1f8645e1f358e68eb75759fb7d6195187af522ba
 
 COCOAPODS: 1.5.3

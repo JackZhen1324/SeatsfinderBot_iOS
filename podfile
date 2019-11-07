@@ -1,7 +1,7 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'SeatsFinderBot' do
+target 'ClassFinder Pro' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 pod 'Alamofire'
@@ -9,15 +9,16 @@ pod 'Kanna'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'SwiftyJSON'
-  # Pods for SeatsFinderBot
+pod 'Siren'
+# Pods for SeatsFinderBot
 
 
-  target 'SeatsFinderBotTests' do
+  target 'ClassFinder ProTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'SeatsFinderBotUITests' do
+  target 'ClassFinder ProUITests' do
     inherit! :search_paths
     # Pods for testing
   end

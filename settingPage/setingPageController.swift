@@ -10,15 +10,15 @@ import UIKit
 import UserNotifications
 class setingPageController: UITableViewController {
     @IBOutlet weak var asuID: UILabel!
-    @IBOutlet weak var asuPass: UILabel!
+   
     let urlObj = URL(string:UIApplication.openSettingsURLString)
     @IBOutlet weak var switchNoti: UISwitch!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let curID = UserDefaults.standard.string(forKey: "asuID") ?? "Unkow ID"
+        let curID = UserDefaults.standard.string(forKey: "asuID") ?? "Unkown ID"
         let curPass = UserDefaults.standard.string(forKey: "asuPass") ?? " Unkonw Password"
        asuID.text = curID
-        asuPass.text = curPass
+        
         self.navigationController?.navigationBar.prefersLargeTitles = true
         NotificationCenter.default.addObserver(self, selector: #selector(initNotifications), name: NSNotification.Name(rawValue:"isTest"), object: nil)
 
@@ -29,10 +29,10 @@ class setingPageController: UITableViewController {
         
         super.viewWillAppear(animated)
         print("返回")
-        let curID = UserDefaults.standard.string(forKey: "asuID") ?? "Unkow ID"
-        let curPass = UserDefaults.standard.string(forKey: "asuPass") ?? " Unkonw Password"
+        let curID = UserDefaults.standard.string(forKey: "asuID") ?? "Unkown ID"
+        let curPass = UserDefaults.standard.string(forKey: "asuPass") ?? " Unkonwn Password"
         asuID.text = curID
-        asuPass.text = curPass
+       
         //   navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "mine_settingIcon2", highlightedImage: "mine_settingIcon2_press", target: self, action: #selector(MeVC.settingClick))
         // 设置弹出提示框的底层视图控制器 代码初始化放在这 返回的时候才可改变通知
         initNotifications()

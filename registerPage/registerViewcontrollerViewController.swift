@@ -40,9 +40,12 @@ registerButton.layer.cornerRadius = 10
         {
              UserDefaults.standard.set(String(asuID.text!), forKey: "asuID")
              UserDefaults.standard.set(String(asuPass.text!), forKey: "asuPass")
+            self.registerButton.isEnabled = false
+            self.registerButton.setAttributedTitle(NSAttributedString(string: ""), for: .disabled)
+            
+            
             UIView.animate(withDuration: 1, animations: {
-                self.registerButton.setTitle("", for: UIControl.State.disabled)
-                self.registerButton.isEnabled = false
+                
                 self.registerButton.backgroundColor = UIColor.gray
             }) { (Bool) in
                  self.performSegue(withIdentifier: "fromRegister", sender: Any?.self)

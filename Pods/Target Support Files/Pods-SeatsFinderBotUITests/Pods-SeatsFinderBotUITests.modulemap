@@ -1,6 +1,0 @@
-framework module Pods_SeatsFinderBotUITests {
-  umbrella header "Pods-SeatsFinderBotUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -52,7 +52,7 @@ class accountChangeView: UIViewController {
             UserDefaults.standard.set(String(asuID.text!), forKey: "asuID")
             UserDefaults.standard.set(String(asuPass.text!), forKey: "asuPass")
             UIView.animate(withDuration: 1, animations: {
-                self.registerButton.setTitle("", for: UIControl.State.disabled)
+                self.registerButton.setAttributedTitle(NSAttributedString(string: ""), for: .disabled)
                 self.registerButton.isEnabled = false
                 self.registerButton.backgroundColor = UIColor.gray
             }) { (Bool) in

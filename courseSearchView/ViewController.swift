@@ -18,12 +18,13 @@ class ViewController: UIViewController {
     var curRes:String!
     var curCell: courseInfoCell?
     var curTerm:String!
-    var termList = ["Pre-Term"]
+    
     var classID:[String]?
     var className:[String]?
     var instructorlist:[String]?
     var courseStatusList:[String]?
-    var searching:Bool?
+    let searching = loadingController(isload: false)
+    let searchCourse = getCourseInfos(isload: false)
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,222 +50,30 @@ class ViewController: UIViewController {
         classID?.append("id1")
         className?.append("name1")
         instructorlist?.append("instrcutor1")
-
         courseResult.reloadData()
         courseResult.delegate = self
         courseResult.dataSource = self
-        
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Course #CSE110"
         searchController.searchBar.tintColor = UIColor.lightGray
         searchController.searchBar.backgroundColor = UIColor.white
         searchController.searchBar.autocapitalizationType = .allCharacters
         searchController.searchBar.delegate = self
-        
         definesPresentationContext = true
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = true
         navigationController?.navigationBar.barTintColor = UIColor.init(red: CGFloat(1.0), green: CGFloat(1.0), blue: CGFloat(1.0), alpha: CGFloat(1.0))
         navigationController?.navigationBar.tintColor = UIColor.darkGray
         tabBarController?.tabBar.barTintColor = UIColor.white
-        
-        let date = Date()
-        let format = DateFormatter()
-        format.dateFormat = "MM"
-        let formattedDate = format.string(from: date)
-        if(Int(formattedDate)!<=6)
-        {format.dateFormat = "YYYY"
-        self.termList = []
-        let currentYear = format.string(from: date)
-            termList.append("Fall \(Int(currentYear)!-1)")
-            termList.append("Spring \(currentYear)")
-            termList.append("Fall \(currentYear)")
-            //searchController.searchBar.scopeButtonTitles?.append("Spring \(currentYear)")
-            //searchController.searchBar.scopeButtonTitles?.append("Fall \(currentYear)")
-            
-        }
-        else{
-            format.dateFormat = "YYYY"
-            let currentYear = format.string(from: date)
-            //searchController.searchBar.scopeButtonTitles?.append("Fall \(currentYear)")
-            //searchController.searchBar.scopeButtonTitles?.append("Spring \(Int(currentYear)!+1)")
-            termList.append("Spring \(currentYear)")
-            termList.append("Fall \(currentYear)")
-            termList.append("Spring \(Int(currentYear)!+1)")
-        }
-        searchController.searchBar.scopeButtonTitles = termList
-        
-      
-     
-        //let nib = UINib.init(nibName:"courseDetailCell",bundle:nil)
-        //self.courseResult.register(nib, forCellReuseIdentifier: "courseDetailCell")
+        searchController.searchBar.scopeButtonTitles = getTerms.getTerms()
+
     
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(false)
     }
-    public func getCourseInfo(searchText:String)
-    {
-        if searchText.characters.count == 0 {
-            searching = false;
-            self.courseResult.reloadData()
-            
-        }
-        else
-        {
-            
-            guard let scopeString = searchController.searchBar.scopeButtonTitles?[searchController.searchBar.selectedScopeButtonIndex] else { return }
-            print(scopeString)
-            let index = scopeString.index(scopeString.startIndex, offsetBy: 5)
-            let mySubstring = scopeString[..<index] // Hello
-            
-            print("test2 \(mySubstring)")
-            
-           
-            searchController.searchBar.scopeBarButtonTitleTextAttributes(for:)
-            let date = Date()
-            let format = DateFormatter()
-            format.dateFormat = "YYYY"
-            let currentYear = format.string(from: date) as String?
-            
-            let index2 = currentYear!.index(currentYear!.startIndex, offsetBy: 2)
-            let index3 = currentYear!.index(currentYear!.startIndex, offsetBy: 4)
-            let index4 = currentYear![index2..<index3]
-            
-            print(index4)
-            var searchTxt:String?
-            var idTxt:String?
-            if(searchText.count>3)
-            {
-                let searchStart = searchText.index(searchText.startIndex, offsetBy: 0)
-                let searchEnd = searchText.index(searchText.startIndex, offsetBy: 3)
-                searchTxt = String(searchText[searchStart..<searchEnd])
-                let idStart = searchText.index(searchText.startIndex, offsetBy: 3)
-                let idEnd = searchText.index(searchText.endIndex, offsetBy: 0)
-                idTxt = "&n=\(String(searchText[idStart..<idEnd]))"
-            
-            }
-            else
-            {
-                searchTxt = searchText
-                idTxt = ""
-            }
-            
-            // Hello
-            var url = ""
-            print(mySubstring)
-            if(mySubstring == "Fall ")
-            {
-                url = "https://webapp4.asu.edu/catalog/myclasslistresults?t=2\(index4)7&s=\(searchTxt!)\(idTxt!.trim())&hon=F&promod=F&e=all&page=1"
-                print(url.trimmingCharacters(in:.whitespacesAndNewlines))
-            }
-            else
-            {
-                url = "https://webapp4.asu.edu/catalog/myclasslistresults?t=2\(index4)1&s=\(searchTxt!)\(idTxt!.trim())&hon=F&promod=F&e=all&page=1"
-                print(url.trimmingCharacters(in: .whitespacesAndNewlines))
-            }
-            
-            Alamofire.request(url.replacingOccurrences(of: " ", with: "", options: NSString.CompareOptions.literal, range: nil)).responseData
-                {
-                    response in
-                    //debugPrint("All Response Info: \(response)")
-                    
-                    if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
-                        print("Data: \(utf8Text)")
-                        self.classID = self.parseResult(html3: utf8Text).0
-                        self.className = self.parseResult(html3: utf8Text).1
-                        self.instructorlist = self.parseResult(html3: utf8Text).2
-                        self.courseStatusList = self.parseResult(html3: utf8Text).3
-                        if(self.classID!.count == 0){
-                            self.searching = false;
-                            self.faliureInfos.text = "No class found!"
-                            self.activityIndicator.stopAnimating()
-                            self.faliureInfos.isHidden = false
-                            self.courseResult.reloadData()
-                        } else
-                        {
-                            self.faliureInfos.isHidden = true
-                            self.searching = true;
-                            self.courseResult.reloadData()
-                        }
-                        
-                        
-                        
-                        print("hellp")
-                        
-                        //td[1]
-                    }
-            }
-        }
-    }
-    public func parseResult(html3:String)->([String],[String],[String],[String])
-    {
-        var classID: [String] = []
-        var className: [String] = []
-        var instructorlist: [String] = []
-        var statuslist: [String] = []
-        do{
-            if var doc:HTMLDocument? =
-            
-            try Kanna.HTML(html:html3, encoding: .utf8) {
-                var bodyNode   = doc?.body
-            if let inputNodes = bodyNode?.xpath("//td[1]") {
-                for node in inputNodes {
-                    //print(node.content)
-                    let node2String = node.content
-                    if (node2String?.trim() != "")
-                    {
-                        classID.append(node2String?.trim() ?? "Unknown")
-                    }
-                    }
-                    
-            }
-                if let inputNodes = bodyNode?.xpath("//td[3]") {
-                    for node in inputNodes {
-                        //print(node.content)
-                        let node2String = node.content
-                        if (node2String?.trim() != "")
-                        {
-                            className.append(node2String?.trim() ?? "Unknown")
-                        }
-                    }
-                    
-                }
-                if let inputNodes = bodyNode?.xpath("//td[4]") {
-                    for node in inputNodes {
-                        //print(node.content)
-                        let node2String = node.content
-                        if (node2String?.trim() != "")
-                        {
-                            instructorlist.append(node2String?.trim() ?? "Unknown")
-                        }
-                    }
-                    
-                }
-                if let inputNodes = bodyNode?.xpath("//td[11]") {
-                    for node in inputNodes {
-                        //print(node.content)
-                        let node2String = node.content
-                        if (node2String?.trim() != "")
-                        {
-                            
-                            statuslist.append(node2String?.trim() ?? "Unknown")
-                        }
-                    }
-                    
-                }
-            }
-            
-        }
-        catch{
-            return (["no class found"],[""],[""],[""])
-            
-        }
-        return (classID,className,instructorlist,statuslist)
-        
-    }
-    
+  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "courseDetail"
         {
@@ -282,8 +91,6 @@ class ViewController: UIViewController {
             
         }
     }
- 
-    
 
 }
 extension String {
@@ -322,7 +129,7 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource
         let cell1 = tableView.dequeueReusableCell(withIdentifier: "courseCell") as! courseInfoCell
         //let cell = Bundle.main.loadNibNamed("courseResultCell", owner: self, options: nil)
         
-        cell1.accessoryType = .disclosureIndicator
+        //cell1.accessoryType = .disclosureIndicator
         cell1.courseID.text = classID?[indexPath.row]
         cell1.courseName.text = className?[indexPath.row]
         cell1.instructorIndo.text = instructorlist?[indexPath.row]
@@ -331,13 +138,14 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource
         var current_status = self.courseStatusList?[indexPath.row] as! String
         if(current_status.first == "0")
         {
-            var image : UIImage = UIImage(named: "closed_final3")!
+            var image : UIImage = UIImage(named: "open_5")!
+            
             
             cell1.courseStatus.image = image
         }
         else{
-            var image : UIImage = UIImage(named: "open_final4")!
-            
+            var image : UIImage = UIImage(named: "closed_5")!
+           
             cell1.courseStatus.image = image
         }
         print("stop animating")
@@ -355,19 +163,28 @@ extension ViewController: UISearchBarDelegate{
         activityIndicator.startAnimating()
         guard let scopeString = searchController.searchBar.scopeButtonTitles?[searchController.searchBar.selectedScopeButtonIndex] else { return }
         print(scopeString)
-        getCourseInfo(searchText:searchController.searchBar.text!)
-        print("change scope")
+        let result = self.searchCourse.search(searchText: searchController.searchBar.text!, courseResult: self.courseResult, searchController: self.searchController, faliureInfos: self.faliureInfos!, activityIndicator: self.activityIndicator){
+            classID,className,instructorlist,courseStatusList in
+            self.classID = classID
+            self.className = className
+            self.instructorlist = instructorlist
+            self.courseStatusList = courseStatusList
+            
+            self.courseResult.reloadData()
+            
+        }
+  
         
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         print("start typing")
-        searching = true;
+        searching.setLoadingStatus(isload: true);
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         print("end typing")
         searchBar.resignFirstResponder()
-        searching = false;
+        searching.setLoadingStatus(isload: false);
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -376,7 +193,7 @@ extension ViewController: UISearchBarDelegate{
         searchController.searchBar.showsCancelButton = false
         
         print("search click")
-        searching = false;
+        searching.setLoadingStatus(isload: false);
     }
     
    
@@ -386,11 +203,21 @@ extension ViewController: UISearchBarDelegate{
         print("searching")
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        getCourseInfo(searchText: searchBar.text!)
+        let result = self.searchCourse.search(searchText: searchController.searchBar.text!, courseResult: self.courseResult, searchController: self.searchController, faliureInfos: self.faliureInfos!, activityIndicator: self.activityIndicator){
+            classID,className,instructorlist,courseStatusList in
+            self.classID = classID
+            self.className = className
+            self.instructorlist = instructorlist
+            self.courseStatusList = courseStatusList
+            print("")
+            print(classID)
+            self.courseResult.reloadData()
+            
+        }
         searchController.searchBar.showsCancelButton = true
         searchController.searchBar.resignFirstResponder()
         view.endEditing(true)
-        searching = false;
+        searching.setLoadingStatus(isload: false);
     }
     
     

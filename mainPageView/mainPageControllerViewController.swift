@@ -13,6 +13,7 @@ import Kanna
 import FirebaseDatabase
 import Firebase
 import SwiftyJSON
+
 class mainPageControllerViewController: UIViewController {
    
     @IBOutlet weak var currentUserName: UILabel!
@@ -22,7 +23,7 @@ class mainPageControllerViewController: UIViewController {
     
     
     @IBOutlet weak var hideView: UIView!
-   
+    let nslock = NSLock()
     @IBOutlet weak var currentUserView: UIView!
     @IBOutlet weak var logView: UIView!
     private let refreshControl = UIRefreshControl()
@@ -33,6 +34,13 @@ class mainPageControllerViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var monitorTable: UITableView!
     @IBOutlet weak var logViewHeight: NSLayoutConstraint!
+    
+    var curLo = [String](repeatElement("", count: 10))
+    var jobs=[String](repeatElement("", count: 10))
+    var mode=[String](repeatElement("", count: 10))
+    var count=[Int](repeatElement(0, count: 10))
+    var courseID = [String](repeatElement("", count: 10))
+    
     var isChecking:String?
     var logs:String?
     var curJobID:String?
@@ -40,11 +48,30 @@ class mainPageControllerViewController: UIViewController {
     var currentCount:String?
     var currentID:String?
     
+    var currentSelect = 0
     var isloading:Bool = true
     var curTerm:String!
     var jobidList:[String]?
     var termList:[String]?
     var classID:[String]?
+    {
+       
+        didSet
+        {
+            if self.classID?.isEmpty == true
+            {
+                self.announcementTitle.isHidden = false
+                self.announcementContent.isHidden = false
+                
+            }
+            else
+            {
+                self.announcementTitle.isHidden = true
+                self.announcementContent.isHidden = true
+            }
+            
+        }
+    }
     var className:[String]?
     var instructorlist:[String]?
     var courseStatusList:[String]?
@@ -58,23 +85,45 @@ class mainPageControllerViewController: UIViewController {
             
         }
         super.viewWillAppear(animated)
-        
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
+        self.refreshControl.beginRefreshing()
+      
         isloading = true
-        //print("viewWillAppear232323")
+        print("viewWillAppear232323")
         
-       reloadData()
+        reloadData()
+            {
+                (success) in
+                if success == true
+                {
+                    
+                }
+                else
+                {
+                    
+                }
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showCurrentUser()
         
-        print("是否第一次运行？\(UserDefaults.isFirstLaunchOfNewVersion() )")
+        print("是否第一次运行？\(UserDefaults.isFirstLaunch() )")
         
     }
-   
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(UserDefaults.isFirstLaunchOfNewVersion()==true)
+       
+        self.termList = []
+        self.classID = []
+        self.className = []
+        self.instructorlist = []
+        self.courseStatusList = []
+        self.asuID = []
+        self.jobidList = []
+        if(UserDefaults.isFirstLaunch()==true)
         {
             performSegue(withIdentifier: "goRgister", sender: Any?.self)
         }
@@ -85,15 +134,22 @@ class mainPageControllerViewController: UIViewController {
         
         logTableView.layer.cornerRadius = 10
         logTableView.layer.backgroundColor = UIColor.lightGray.cgColor
-    
-        
+        //logTableView.layoutIfNeeded()
+        //logTableView.rowHeight = logTableView.contentSize.height
+        //logTableView.rowHeight = CGFloat(integerLiteral: 150)
         
         setupTableView()
         
+        extendedLayoutIncludesOpaqueBars = true
         refreshControl.addTarget(self, action: #selector(refreshWeatherData(_:)), for: .valueChanged)
+        
+        //refreshControl.attributedTitle = NSAttributedString(string: "Refreshing..")
+        //refreshControl.layoutIfNeeded()
+        //refreshControl.beginRefreshing()
+        //refreshPulled()
         getCurrentTerm()
-        self.announcementContent.isHidden = true
-        self.announcementTitle.isHidden = true
+        self.announcementContent.isHidden = false
+        self.announcementTitle.isHidden = false
         self.announcementTitle.text = "Now Supporting \(getCurrentTerm()) classes"
         self.announcementContent.text = "Tap the plus to get started"
         setupAddButton()
@@ -110,12 +166,27 @@ class mainPageControllerViewController: UIViewController {
         self.currentCount = ""
         self.curJobID = ""
         self.currentID = ""
-        reloadData()
+        
+            self.refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
+        
+        self.refreshControl.beginRefreshing()
        
+            self.reloadData{
+            (success) in
+            if success == true
+            {
+                self.refreshControl.endRefreshing()
+            }
+            else
+            {
+                
+            }
+        }
+        
         // Do any additional setup after loading the view.
     }
     func showCurrentUser()  {
-        let currentUSER = UserDefaults.standard.string(forKey: "asuID") ?? "Unknow"
+        let currentUSER = UserDefaults.standard.string(forKey: "asuID") ?? "Unknown"
        self.currentUserName.text = "log in as \(currentUSER)"
         self.currentUserName.textColor = UIColor.clear
         self.currentUserView.backgroundColor = UIColor.clear
@@ -142,18 +213,52 @@ class mainPageControllerViewController: UIViewController {
     }
     @IBAction func goSearchPage(_ sender: Any) {
         self.isChecking = "1"
+        
         self.lock = 1
     }
+    
     @objc private func refreshWeatherData(_ sender: Any) {
+        
         // Fetch Weather Data
         fetchWeatherData()
     }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
+    }
+    @objc func refreshPulled() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [refreshControl] in
+            refreshControl.endRefreshing()
+            //let top = self.monitorTable.adjustedContentInset.top
+            //let y = self.refreshControl.frame.maxY + top
+            //self.monitorTable.setContentOffset(CGPoint(x: 0, y: -y), animated:true)
+            self.refreshControl.endRefreshing()
+            
+        }
+    }
     private func fetchWeatherData() {
-        
+        //self.refreshControl.beginRefreshing()
             DispatchQueue.main.async {
                 self.isloading = true
-                self.reloadData()
-                self.refreshControl.endRefreshing()
+                
+                self.reloadData{
+                    (success) in
+                    if success == true
+                    {
+                        self.refreshControl.endRefreshing()
+                    }
+                    else
+                    {
+                         self.refreshControl.endRefreshing()
+                    }
+                }
+                //self.refreshControl.endRefreshing()
+                self.refreshPulled()
+                
+                
+                
                 //self.activityIndicatorView.stopAnimating()
             }
         
@@ -200,230 +305,29 @@ class mainPageControllerViewController: UIViewController {
         addButton.layer.cornerRadius = addButton.frame.height/2
         addButton.layer.shadowColor = UIColor.black.cgColor
         addButton.layer.shadowPath = UIBezierPath(roundedRect: addButton.bounds, cornerRadius: addButton.layer.cornerRadius).cgPath
-        addButton.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
+        addButton.layer.shadowOffset = CGSize(width: 0.5, height: 3.0)
         addButton.layer.shadowOpacity = 0.5
-        addButton.layer.shadowRadius = 1.0
+        addButton.layer.shadowRadius = 2.0
+ 
     }
-    func updateCourseStatus(courseName:String,term:String,index1:Int)
-    {
-        https://webapp4.asu.edu/catalog/classlist?t=2197&k=87660&k=87660&hon=F&promod=F&e=all&page=1
-            if courseName.characters.count == 0 {
-            
-            self.monitorTable.reloadData()
-        }
-        else
-        {
-            
-            let scopeString = term
-            //print(scopeString)
-            let index = scopeString.index(scopeString.startIndex, offsetBy: 5)
-            let mySubstring = scopeString[..<index] // Hello
-            
-           // print("test2 \(mySubstring)")
-            
-            
-            
-            let date = Date()
-            let format = DateFormatter()
-            format.dateFormat = "YYYY"
-            let currentYear = format.string(from: date) as String?
-            
-            let index2 = currentYear!.index(currentYear!.startIndex, offsetBy: 2)
-            let index3 = currentYear!.index(currentYear!.startIndex, offsetBy: 4)
-            let index4 = currentYear![index2..<index3]
-            
-            //print(index4)
-            var searchTxt:String?
-            var idTxt:String?
-            if(courseName.count>3)
-            {
-                let searchStart = courseName.index(courseName.startIndex, offsetBy: 0)
-                let searchEnd = courseName.index(courseName.startIndex,offsetBy:3)
-                searchTxt = String(courseName[searchStart..<searchEnd])
-                let idStart = courseName.index(courseName.startIndex, offsetBy: 3)
-                let idEnd = courseName.index(courseName.endIndex, offsetBy: 0)
-                idTxt = "&n=\(String(courseName[idStart..<idEnd]))"
-                
-            }
-            else
-            {
-                searchTxt = courseName
-                idTxt = ""
-            }
-            
-            // Hello
-            var url = ""
-            //print(mySubstring)
-            if(mySubstring == "Fall ")
-            {
-                
-                //url = "https://webapp4.asu.edu/catalog/myclasslistresults?t=2\(index4)7&s=\(searchTxt!)\(idTxt!.trim())&hon=F&promod=F&e=all&page=1"
-                
-                url = "https://webapp4.asu.edu/catalog/myclasslistresults?t=2\(index4)7&k=\(courseName)&k=\(courseName)&hon=F&promod=F&e=all&page=1"
-                //print(url.trimmingCharacters(in:.whitespacesAndNewlines))
-            }
-            else
-            {
-                url = "https://webapp4.asu.edu/catalog/myclasslistresults?t=2\(index4)1&k=\(courseName)&k=\(courseName)&hon=F&promod=F&e=all&page=1"
-                //print(url.trimmingCharacters(in: .whitespacesAndNewlines))
-            }
-            
-            //print(url)
-            Alamofire.request(url.replacingOccurrences(of: " ", with: "", options: NSString.CompareOptions.literal, range: nil)).responseData
-                {
-                    response in
-                    //debugPrint("All Response Info: \(response)")
-                    
-                    if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
-                        //print("Data: \(utf8Text)")
-                        do
-                        {
-                        if try self.parseResult(html3: utf8Text).3[0].first == "0"
-                        {
-                        self.courseStatusList![index1] = "close"
-                        }
-                        else
-                        {
-                            self.courseStatusList![index1] = "open"
-                        }
-                        self.isloading = false
-                        self.monitorTable.reloadData()
-                        //print("Start Reloading")
-                        //print(self.courseStatusList)
-                        }
-                        catch
-                        {
-                            
-                        }
-                        
-                        //td[1]
-                    }
-            }
-        }
-    }
-    public func parseResult(html3:String)->([String],[String],[String],[String])
-    {
-        var classID: [String] = []
-        var className: [String] = []
-        var instructorlist: [String] = []
-        var statuslist: [String] = []
-        do{
-            //print("start parse")
-            if var doc:HTMLDocument? =
-                
-                try Kanna.HTML(html:html3, encoding: .utf8) {
-                var bodyNode   = doc?.body
-                
-                if let inputNodes = bodyNode?.xpath("//td[1]") {
-                    print(" parse classID")
-                    for node in inputNodes {
-                        //print(node.content)
-                        let node2String = node.content
-                        if (node2String?.trim() != "")
-                        {
-                            classID.append(node2String?.trim() ?? "Unknown")
-                        }
-                    }
-                    
-                }
-                if let inputNodes = bodyNode?.xpath("//td[3]") {
-                    print(" parse className")
-                    for node in inputNodes {
-                        //print(node.content)
-                        let node2String = node.content
-                        if (node2String?.trim() != "")
-                        {
-                            className.append(node2String?.trim() ?? "Unknown")
-                        }
-                    }
-                    
-                }
-                if let inputNodes = bodyNode?.xpath("//td[4]") {
-                    print(" parse instructorlist")
-                    for node in inputNodes {
-                        //print(node.content)
-                        let node2String = node.content
-                        if (node2String?.trim() != "")
-                        {
-                            instructorlist.append(node2String?.trim() ?? "Unknown")
-                        }
-                    }
-                    
-                }
-                if let inputNodes = bodyNode?.xpath("//td[11]") {
-                   // print(" parse statuslist")
-                    //print(inputNodes)
-                    for node in inputNodes {
-                        //print(node.content)
-                        let node2String = node.content
-                        if (node2String?.trim() != "")
-                        {
-                            
-                            statuslist.append(node2String?.trim() ?? "Unknown")
-                            
-                        }
-                    }
-                    
-                }
-                
-            }
-            
-        }
-        catch{
-            return (["no class found"],[""],[""],[""])
-            
-        }
-        return (classID,className,instructorlist,statuslist)
-        
-    }
-    func reloadData()
+    
+    func reloadData(completion:((_ success: Bool)->Void)?)
     {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Entity")
         //request.predicate = NSPredicate(format: "age = %@", "12")
         request.returnsObjectsAsFaults = false
+        
+        
+ 
         do {
-            self.termList = []
-            self.classID = []
-            self.className = []
-            self.instructorlist = []
-            self.courseStatusList = []
-            self.asuID = []
-            self.jobidList = []
+            
             let result = try context.fetch(request)
             var i = 0
-            var isEmpy = 1
-            for data in result as! [NSManagedObject] {
-                
-                isEmpy = 0
-                self.jobidList?.append(data.value(forKey: "coutseTime") as! String)
-                self.classID?.append(data.value(forKey: "courseID") as! String)
-                self.asuID?.append(data.value(forKey: "courseTitle") as! String)
-                self.className?.append(data.value(forKey: "courseName") as! String)
-                self.termList?.append(data.value(forKey: "courseTerm") as! String)
-                //print(data.value(forKey: "courseID") as! String,data.value(forKey: "courseTerm") as! String,data.value(forKey: "courseStatus") as! String)
-                self.instructorlist?.append(data.value(forKey: "instructorInfo") as! String)
-               // checkCourseStatus(classID,className)
-                
-                self.courseStatusList?.append(data.value(forKey: "courseStatus") as! String)
-                print("current index: \(i)")
-                updateCourseStatus(courseName: data.value(forKey: "courseID") as! String,term: data.value(forKey: "courseTerm") as! String,index1: i)
-                
-                i = i + 1
-                print("finsh loading")
-                
-            }
-            if isEmpy == 1
-            {
-                self.announcementContent.isHidden = false
-                self.announcementTitle.isHidden = false
-            }
-            else
-            {
-                self.announcementContent.isHidden = true
-                self.announcementTitle.isHidden = true
-            }
+            let currentUSER = UserDefaults.standard.string(forKey: "asuID") ?? "Unknown"
+            getAllCourseInfo(asuID: currentUSER)
+            
             
         } catch {
             
@@ -432,8 +336,94 @@ class mainPageControllerViewController: UIViewController {
         monitorTable.reloadData()
         
         
+        
+        
     }
-   
+    func getAllCourseInfo(asuID:String) {
+        var data = ["asuID":asuID]
+        
+        //print(data)
+        
+        var url = "http://72.201.206.220:8000/fetchAllCourse/"
+        
+        Alamofire.request(url, method: .post, parameters: data, encoding: URLEncoding.default).responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                print("SUCCESS6")
+                //print(response.result.value)
+                do{
+                    var json = try JSON(data: response.data!)
+                    print(json)
+            
+                    print("###################################")
+                    var i = 0
+                    //print(json["message"])
+                    for (index,subJson):(String, JSON) in json {
+                        // Do something you want
+                        //print(subJson["courseID"].string,subJson["section"].string)
+                        print(subJson["jobId"].string)
+                        self.jobidList?.append(subJson["jobId"].string ?? "Unknown")
+                        
+                        
+                        print("\(index) classIDtEST")
+                        print(self.classID)
+                        if(self.classID?.contains(subJson["coueseId"].string ?? "Unknown")==true)
+                        {}
+                        else
+                        {
+                        self.className?.append(subJson["courseID"].string ?? "Unknown")
+                        //self.asuID?.append(subJson["user"].string ?? "Unknown")
+                        self.classID?.append(subJson["coueseId"].string ?? "N/A")
+                        var temSemester = subJson["semester"].string ?? "N/A"
+                        self.termList?.append(temSemester.replacingOccurrences(of: "+", with: " "))
+                        //print(data.value(forKey: "courseID") as! String,data.value(forKey: "courseTerm") as! String,data.value(forKey: "courseStatus") as! String)
+                        self.instructorlist?.append( subJson["instructor"].string ?? "N/A")
+                        // checkCourseStatus(classID,className)
+                        self.asuID?.append(subJson["user"].string ?? "Unknown User")
+                        print(subJson["logs"].string)
+                        if(subJson["logs"].string?.last == "L")
+                        {
+                            print(self.courseStatusList)
+                            print("after****************")
+                            self.courseStatusList?.append("close")
+                            print(self.courseStatusList)
+                            }
+                            else
+                        {
+                            self.courseStatusList?.append("open")
+                            }
+                        
+                        //print("test\(self.courseStatusList)")
+                        }
+                        self.monitorTable.reloadData()
+                        //self.updateCourseStatus(courseName: subJson["section"].string ?? "N/A",term: subJson["semester"].string ?? "UnknownTerm",index1: i)
+                        i = i + 1
+                        
+                    }
+                   
+                    
+                    self.refreshControl.endRefreshing()
+                    self.isloading = false
+                    
+                    
+                    
+                }
+                catch{
+                    print("invalid ")
+                    self.refreshControl.endRefreshing()
+                    self.isloading = false
+                    
+                }
+            case .failure:
+                self.refreshControl.endRefreshing()
+                self.isloading = false
+                print("ERROR")
+                
+                
+            }
+        }
+    }
     func deleteData(_ entity:String,_ classID:String) {
             // Initialize Fetch Request
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -504,33 +494,80 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
 {
     @objc public func pressed(sender:Any)
     {
-        
-        UIView.animate(withDuration: 1) {
+        self.isChecking = "0"
+        self.lock = 1
+        stopTheDamnRequests()
+        UIView.animate(withDuration: 0.6) {
             self.logTableView.layer.position = CGPoint(x: self.logTableView.frame.width/2, y: self.view.frame.origin.y+self.view.frame.height*1.2)
             self.hideView.backgroundColor = UIColor.init(displayP3Red: CGFloat(239.0/255.0), green: CGFloat(239.0/255.0), blue: CGFloat(244.0/255.0), alpha: CGFloat(1))
             
         }
         self.hideView.isHidden = true
-        self.isChecking = "0"
-        self.lock = 1
+        
     }
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView.isEqual(logTableView)
+        {
+        let height = CGFloat(50.1)
+        return height
+        }
+        else
+        {
+            return CGFloat(0.0)
+        }
+    }
+     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+   
+          
         let frame: CGRect = tableView.frame
-        let headerTitle:UILabel = UILabel(frame: CGRect(x: 10, y: 3, width: 150, height: 50))
-        let DoneBut: UIButton = UIButton(frame: CGRect(x: self.view.bounds.width-80, y: 0, width: 100, height: 50))
+        
+        let headerView: UIView = UIView(frame: CGRect(x:0,y: 0,width: frame.size.height,height:frame.size.width))
+        
+        let height = CGFloat(headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height)
+        let headerTitle:UILabel = UILabel(frame: CGRect(x: self.view.bounds.width*0.06, y: headerView.frame.height*0.01, width: 150, height: height))
+        let DoneBut: UIButton = UIButton(frame: CGRect(x: self.view.bounds.width*0.03, y: headerView.frame.height*0.03, width: 35, height: 35))
+        
         headerTitle.text = "LOGS"
         headerTitle.textColor = UIColor.white
         headerTitle.font = UIFont(name: "System", size: CGFloat(14))
-        DoneBut.setTitle("x", for: .normal)
+        let closeImg:UIImage = UIImage(named: "icons8-multiply-100")!
+        
+        DoneBut.setImage(closeImg, for: .normal)
+        DoneBut.layoutIfNeeded()
+        
+        //DoneBut.setTitle("x", for: .normal)
         DoneBut.backgroundColor = UIColor.clear
         
         DoneBut.addTarget(self, action: #selector(pressed), for: .touchUpInside)
-        let headerView: UIView = UIView(frame: CGRect(x:0,y: 0,width: frame.size.height,height:frame.size.width))
         
         headerView.addSubview(DoneBut)
-        headerView.addSubview(headerTitle)
-       
+       //headerView.addSubview(headerTitle)
+        
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        //headerView.frame.size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         return headerView
+ 
+        
+    }
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if tableView.isEqual(logTableView)
+        {
+            return ""
+        }
+        else
+        {
+            return ""
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if tableView.isEqual(logTableView)
+        {
+            return CGFloat(50.0)
+        }
+        else{
+            return CGFloat(0.0)
+        }
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
@@ -543,42 +580,54 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         }
         else
         {
+           currentSelect = indexPath.row
        self.isChecking = "1"
-            print("current:  \(isChecking)")
+            //print("current:  \(isChecking)")
+            //print("lock:  \(self.lock)")
         if self.lock == 1
         {
             self.hideView.isHidden = false
-            UIView.animate(withDuration: 1) {
+            UIView.animate(withDuration: 0.6) {
                 self.hideView.backgroundColor = UIColor.init(displayP3Red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: CGFloat(0.5))
             }
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.6) {
             
             //self.logTableView.frame.size.width = self.view.frame.width
-            self.logTableView.layer.position = CGPoint(x: self.logTableView.frame.width/2, y: self.view.frame.origin.y+self.view.frame.height-self.logTableView.frame.height*1.2)
+            self.logTableView.layer.position = CGPoint(x: self.logTableView.frame.width/2, y: self.view.frame.origin.y+self.view.frame.height/2)
             
             
         }
+           
             DispatchQueue.global(qos: .background).async {
+               // print("ischcek:\(self.isChecking)")
+                
                 while self.isChecking == "1"
-                {   print(self.asuID)
-                    print(indexPath.row)
-                    //print(self.classID![indexPath.row])
+                {   //print(self.asuID)
+                    //print(self.classID)
+                    //print(self.classID)
+                    print(self.isChecking)
+                    print(self.classID![indexPath.row])
                     do
                     {
-                    try self.checkLogs(asuID: self.asuID![indexPath.row], courseID: self.classID![indexPath.row] )
+                    try self.checkLogs(asuID: self.asuID![indexPath.row], courseID: self.classID![indexPath.row],index: indexPath.row)
                     sleep(1)
                     }
                     catch
                     {
                         print("check log fail")
                     }
+                    
                 }
+               
+                
+                
+                
                 
             }
-            print(asuID)
-            print(classID)
-            checkLogs(asuID: self.asuID![indexPath.row], courseID: self.classID![indexPath.row] )
-            self.lock = lock * -1
+            
+            self.lock = self.lock * -1
+            
+            
             }
             else
         {
@@ -590,7 +639,20 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         
         
     }
-    func checkLogs(asuID:String,courseID:String)
+    func stopTheDamnRequests(){
+        if #available(iOS 9.0, *) {
+            Alamofire.SessionManager.default.session.getAllTasks { (tasks) in
+                tasks.forEach{ $0.cancel() }
+            }
+        } else {
+            Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
+                sessionDataTask.forEach { $0.cancel() }
+                uploadData.forEach { $0.cancel() }
+                downloadData.forEach { $0.cancel() }
+            }
+        }
+    }
+    func checkLogs(asuID:String,courseID:String,index:Int)
     {
         
         var data = ["courseID":courseID,"asuID":asuID]
@@ -603,43 +665,21 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
             
             switch response.result {
             case .success:
-                print("SUCCESS")
+                //print("SUCCESS15")
                 //print(response.result.value)
                 do{
                     var json = try JSON(data: response.data!)
                     //print(json)
                     //print(json["message"])
-                    let curLog = json["logs"].string
-                    let jobs = json["jobs"].string
-                    let mode = json["mode"].string
-                    let count = json["count"].int
-                    let courseID = json["courseID"].string
-                    do
-                    {
-                        self.logs = try curLog
-                        self.curJobID = jobs
-                        self.currentMode = mode
-                       
-                        
-                        if count != nil
-                        {
-                        self.currentCount = String(count!)
-                        }
-                        else
-                        {
-                            self.currentCount = "0"
-                        }
-                        self.currentID = courseID
-                        self.logTableView.reloadData()
-                    }
-                    catch
-                    {
-                        throw error
-                       self.logs = "Fail to retrieve log information!"
-                    }
-                   
+                    self.curLo[index] = json["logs"].string ?? "none"
+                    self.jobs[index] = json["jobs"].string ?? "none"
+                    self.mode[index] = json["mode"].string ?? "none"
+                    self.count[index] = json["count"].int ?? 0
+                    self.courseID[index] = json["courseID"].string ?? "none"
+                  
                     
                     //print(response)
+                    self.logTableView.reloadData()
                   
                 }
                 catch{
@@ -667,7 +707,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         }
         else
         {
-        print(classID?.count)
+        //print(classID?.count)
         return classID?.count ?? 0
         }
         
@@ -693,9 +733,11 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
             cell1.detailTextLabel?.textColor = UIColor.darkGray
             cell1.textLabel?.backgroundColor = UIColor.clear
             cell1.detailTextLabel?.backgroundColor = UIColor.clear
+   
+            print(jobs)
             if self.curJobID != nil
             {
-            cell1.jobID!.text = "Job ID: \(self.curJobID!)"
+            cell1.jobID!.text = "Job ID: \(self.jobs[currentSelect])"
             }
             else
             {
@@ -703,7 +745,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
             }
             if self.logs != nil
             {
-            cell1.logs?.text = "Log: \(self.logs!)"
+            cell1.logs?.text = "Log: \(self.curLo[currentSelect])"
             }
             else
             {
@@ -711,7 +753,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
             }
             if self.currentMode != nil
             {
-            cell1.mod?.text = "Mode: \(self.currentMode!)"
+            cell1.mod?.text = "Mode: \(self.mode[currentSelect])"
             }
             else
             {
@@ -719,7 +761,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
             }
             if self.currentCount != nil
             {
-            cell1.count?.text = "Count: \(self.currentCount!)"
+            cell1.count?.text = "Count: \(self.count[currentSelect])"
             }
             else
             {
@@ -729,7 +771,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
             
              if self.currentID != nil
              {
-            cell1.targetCourse?.text = "Target Class: \(self.currentID!)"
+            cell1.targetCourse?.text = "Target Class: \(self.courseID[currentSelect])"
             }
             else
              { cell1.targetCourse?.text = "Target Class: Fail to fetch information"
@@ -746,7 +788,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         let cell1 = tableView.dequeueReusableCell(withIdentifier: "monitorTable") as! courseMonitorCellTableViewCell
         cell1.backgroundColor = UIColor.clear
         //let cell = Bundle.main.loadNibNamed("courseResultCell", owner: self, options: nil)
-        cell1.accessoryType = .disclosureIndicator
+            //cell1.accessoryType = .disclosureIndicator
         cell1.courseID.text = classID![indexPath.row]
         cell1.courseName.text = className![indexPath.row]
         cell1.instructorInfo.text = instructorlist![indexPath.row]
@@ -759,6 +801,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         if isloading == true
         {
             cell1.curStatus.isHidden = true
+            
             cell1.courseStatusActivityView.startAnimating()
             cell1.courseStatusActivityView.isHidden = false
             
@@ -771,15 +814,16 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
             if(current_status == "close")
             {
                 UIView.animate(withDuration: 0.5) {
-                    var image : UIImage = UIImage(named: "closed_final3")!
                     
+                    var image : UIImage = UIImage(named: "open_5")!
                     cell1.curStatus.image = image
                 }
                 
             }
             else{
                 UIView.animate(withDuration: 0.5) {
-                    var image : UIImage = UIImage(named: "open_final4")!
+                    var image : UIImage = UIImage(named: "closed_5")!
+                    
                     
                     cell1.curStatus.image = image
                 }
@@ -792,7 +836,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
-    }
+    }/*
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if tableView.isEqual(logTableView)
         {
@@ -803,7 +847,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         {
             return nil
         }
-    }
+    }*/
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if tableView.isEqual(logTableView)
@@ -837,8 +881,9 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
             Alamofire.request(url, method: .post, parameters: data, encoding: URLEncoding.default).responseJSON { response in
                 switch response.result {
                 case .success:
-                    print("SUCCESS")
-                    print(response)
+                    print("SUCCESS2")
+                    
+                    //self.deleteTaskFromFRbase(classID: self.classID![indexPath.row],user: self.asuID![indexPath.row])
                     
                 case .failure:
                     print("ERROR")
@@ -847,8 +892,10 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
                 }
             }
             print(indexPath.row)
+            print("start deletihng")
             print(self.asuID)
             print(self.classID)
+            
             deleteTaskFromFRbase(classID: self.classID![indexPath.row],user: self.asuID![indexPath.row])
             
             
@@ -880,7 +927,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         
         //var data = ["project":"seatsfinder","job":self.jobidList![indexPath.row]]
         
-        var data:JSON = ["classId": classID,"user": user]
+        var data = ["classId": classID,"user": user]
         
         print("firebase:\(data)")
         
@@ -894,17 +941,33 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
                 ]
             ]]
         
-        
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+        print(parameters)
+        Alamofire.request(url, method: .post, parameters: data, encoding: URLEncoding.default).responseJSON { response in
             switch response.result {
             case .success:
-                print("SUCCESS")
-                print(response)
+                print("SUCCESS3")
+                
+                do{
+                    var json = try JSON(data: response.data!)
+                    print(json)
+                    print("ERROR3")
+                }
+                catch
+                {
+                    
+                }
                 
             case .failure:
+                do{
+                    var json = try JSON(data: response.data!)
+                    print(json)
+                    print("ERROR2")
+                }
+                catch
+                {
+                    
+                }
                 
-                print(response)
-                print("ERROR2")
                 
                 
             }
@@ -944,3 +1007,12 @@ extension UserDefaults {
         return isFirstLaunchOfNewVersion
     }
 }
+extension UIRefreshControl {
+    func beginRefreshingManually() {
+        if let scrollView = superview as? UIScrollView {
+            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y - frame.height), animated: true)
+        }
+        beginRefreshing()
+    }
+}
+
