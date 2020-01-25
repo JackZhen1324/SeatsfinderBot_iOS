@@ -13,8 +13,7 @@ import UIKit
 import CoreData
 import Alamofire
 import Kanna
-import FirebaseDatabase
-import Firebase
+
 import SwiftyJSON
 
 class monitoring_utils {
@@ -85,7 +84,7 @@ class monitoring_utils {
         
         //print(data)
         
-        var url = "http://72.201.206.220:8000/fetchAllCourse/"
+        var url = "http://68.225.193.31:8000/fetchAllCourse/"
         
         Alamofire.request(url, method: .post, parameters: data, encoding: URLEncoding.default).responseJSON { response in
             

@@ -10,6 +10,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class accountChangeView: UIViewController {
     @IBOutlet weak var asuPass: UITextField!
@@ -56,11 +58,57 @@ class accountChangeView: UIViewController {
                 self.registerButton.isEnabled = false
                 self.registerButton.backgroundColor = UIColor.gray
             }) { (Bool) in
-                self.performSegue(withIdentifier: "backToSetting", sender: Any?.self)
+                print("back")
+                var isCourseExist = self.registerUser()
+                              {
+                                      (success) in
+                                      print(success)
+                                      if success == true
+                                      
+                                      {
+                                             self.performSegue(withIdentifier: "backToSetting", sender: Any?.self)
+                                         
+                                  }
+                                  else
+                                  {
+                                        self.performSegue(withIdentifier: "backToSetting", sender: Any?.self)
+                                  }
+                              }
+              
             }
     }
     
         
+        
+    }
+    func registerUser(completion:((_ success: Bool)->Void)?)
+    { let url = "http://68.225.193.31:8000/registerUser/"
+        let newToken = (UIApplication.shared.delegate as! AppDelegate).deviceID
+        print(newToken)
+        let data = ["userID":newToken,"asuID":String(asuID.text!)]
+        print(data)
+        Alamofire.request(url, method: .post, parameters: data, encoding: JSONEncoding.default).responseJSON { response in
+            do{
+                var json = try JSON(data: response.data!)
+                if(json["result"]=="success"){
+                    
+                    completion?(true)
+                }
+                else
+                {
+                    
+                    completion?(false)
+                }
+                
+                
+            }
+            catch
+            {
+                completion?(true)
+                print("error")
+            }
+            
+        }
         
     }
     /*

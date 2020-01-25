@@ -142,7 +142,7 @@ class overViewController: UITableViewController {
             var username:String!
             var level:String!
             var choice:String!
-            var url:String! = "http://72.201.206.220:8000/addClass/"
+            var url:String! = "http://68.225.193.31:8000/addClass/"
             var project:String! = "seatsfinder"
             var spider:String! = "seatsfinderbots"
             var semester:String! = self.term?.replacingOccurrences(of: " ", with: "+")
@@ -176,8 +176,10 @@ class overViewController: UITableViewController {
                 
                 if asuIDInput.text!.isEmpty || asuPassInput.text!.isEmpty
                 {
-                    asuPassInput.shake()
-                    asuIDInput.shake()
+                     username = "Unknown"
+                     password = "Unkonwn"
+                                       print("we are here1")
+                                       SendSchdeuleRequest(url: url, project: project, spider: spider, semester: semester, section: section, level: level, choice: choice, reserved: reserved, username: username, password: password, timeinterval: "2", deviceId: newToken,swapWith: self.swapTo.text ?? "",courseID:courseID__,instructor:instructor__,twoSteps: twoSteps)
                 }
                 else
                 {
@@ -242,7 +244,7 @@ class overViewController: UITableViewController {
                 var level:String!
                 var choice:String!
                 
-                var url:String! = "http://72.201.206.220:8000/addClass/"
+                var url:String! = "http://68.225.193.31:8000/addClass/"
                 var project:String! = "seatsfinder"
                 var spider:String! = "seatsfinderbots"
                 var semester:String! = self.term?.replacingOccurrences(of: " ", with: "+")
@@ -390,7 +392,7 @@ class overViewController: UITableViewController {
     }
     }
     func checkCourseExist(asuID:String,classID:String,completion:((_ success: Bool)->Void)?)
-    { let url = "http://72.201.206.220:8000/checkCourseExist/"
+    { let url = "http://68.225.193.31:8000/checkCourseExist/"
         let data = ["asuID":asuID,"courseID":classID]
         var isExist = ""
         Alamofire.request(url, method: .post, parameters: data, encoding: URLEncoding.default).responseJSON { response in

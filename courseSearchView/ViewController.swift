@@ -159,10 +159,12 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource
 extension ViewController: UISearchBarDelegate{
    
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
+        //activityIndicator.isHidden = false
+        //activityIndicator.startAnimating()
         guard let scopeString = searchController.searchBar.scopeButtonTitles?[searchController.searchBar.selectedScopeButtonIndex] else { return }
         print(scopeString)
+        activityIndicator.isHidden = false
+               activityIndicator.startAnimating()
         let result = self.searchCourse.search(searchText: searchController.searchBar.text!, courseResult: self.courseResult, searchController: self.searchController, faliureInfos: self.faliureInfos!, activityIndicator: self.activityIndicator){
             classID,className,instructorlist,courseStatusList in
             self.classID = classID
@@ -173,6 +175,7 @@ extension ViewController: UISearchBarDelegate{
             self.courseResult.reloadData()
             
         }
+        searching.setLoadingStatus(isload: false);
   
         
     }

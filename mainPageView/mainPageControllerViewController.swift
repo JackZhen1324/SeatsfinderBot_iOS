@@ -10,8 +10,7 @@ import UIKit
 import CoreData
 import Alamofire
 import Kanna
-import FirebaseDatabase
-import Firebase
+
 import SwiftyJSON
 
 class mainPageControllerViewController: UIViewController {
@@ -49,7 +48,7 @@ class mainPageControllerViewController: UIViewController {
     var currentID:String?
     
     var currentSelect = 0
-    var isloading:Bool = true
+    var isloading:Bool = false
     var curTerm:String!
     var jobidList:[String]?
     var termList:[String]?
@@ -58,16 +57,22 @@ class mainPageControllerViewController: UIViewController {
        
         didSet
         {
-            if self.classID?.isEmpty == true
+            if self.classID?.isEmpty == true && isloading == false
             {
+                print(self.classID?.isEmpty,isloading,"show title")
                 self.announcementTitle.isHidden = false
                 self.announcementContent.isHidden = false
                 
             }
-            else
-            {
+            else if self.classID?.isEmpty == false
+            {print("hiden title")
                 self.announcementTitle.isHidden = true
                 self.announcementContent.isHidden = true
+            }
+            else{
+                print("is hidden")
+                print(self.classID,isloading)
+                
             }
             
         }
@@ -86,17 +91,19 @@ class mainPageControllerViewController: UIViewController {
         }
         super.viewWillAppear(animated)
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
+        print("viewWillAppear232323")
+        isloading = true
         self.refreshControl.beginRefreshing()
       
-        isloading = true
-        print("viewWillAppear232323")
+        //isloading = true
+        
         
         reloadData()
             {
                 (success) in
                 if success == true
                 {
-                    
+                    self.refreshControl.endRefreshing()
                 }
                 else
                 {
@@ -115,14 +122,8 @@ class mainPageControllerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        self.termList = []
-        self.classID = []
-        self.className = []
-        self.instructorlist = []
-        self.courseStatusList = []
-        self.asuID = []
-        self.jobidList = []
+       UIApplication.shared.applicationIconBadgeNumber = 0
+        
         if(UserDefaults.isFirstLaunch()==true)
         {
             performSegue(withIdentifier: "goRgister", sender: Any?.self)
@@ -153,7 +154,7 @@ class mainPageControllerViewController: UIViewController {
         self.announcementTitle.text = "Now Supporting \(getCurrentTerm()) classes"
         self.announcementContent.text = "Tap the plus to get started"
         setupAddButton()
-        isloading = true
+        //isloading = true
         
         navigationController?.navigationBar.prefersLargeTitles = true
         logTableView.delegate = self
@@ -223,6 +224,7 @@ class mainPageControllerViewController: UIViewController {
         fetchWeatherData()
     }
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isloading == true
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
     }
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -241,7 +243,7 @@ class mainPageControllerViewController: UIViewController {
     private func fetchWeatherData() {
         //self.refreshControl.beginRefreshing()
             DispatchQueue.main.async {
-                self.isloading = true
+                //self.isloading = true
                 
                 self.reloadData{
                     (success) in
@@ -312,7 +314,14 @@ class mainPageControllerViewController: UIViewController {
     }
     
     func reloadData(completion:((_ success: Bool)->Void)?)
-    {
+    {isloading = true
+        self.termList = []
+        self.classID = []
+        self.className = []
+        self.instructorlist = []
+        self.courseStatusList = []
+        self.asuID = []
+        self.jobidList = []
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Entity")
@@ -333,7 +342,7 @@ class mainPageControllerViewController: UIViewController {
             
             print("Failed")
         }
-        monitorTable.reloadData()
+        //monitorTable.reloadData()
         
         
         
@@ -344,7 +353,7 @@ class mainPageControllerViewController: UIViewController {
         
         //print(data)
         
-        var url = "http://72.201.206.220:8000/fetchAllCourse/"
+        var url = "http://68.225.193.31:8000/fetchAllCourse/"
         
         Alamofire.request(url, method: .post, parameters: data, encoding: URLEncoding.default).responseJSON { response in
             
@@ -389,20 +398,20 @@ class mainPageControllerViewController: UIViewController {
                             self.courseStatusList?.append("close")
                             print(self.courseStatusList)
                             }
-                            else
+                        else
                         {
                             self.courseStatusList?.append("open")
                             }
                         
                         //print("test\(self.courseStatusList)")
                         }
-                        self.monitorTable.reloadData()
+                        
                         //self.updateCourseStatus(courseName: subJson["section"].string ?? "N/A",term: subJson["semester"].string ?? "UnknownTerm",index1: i)
                         i = i + 1
                         
                     }
                    
-                    
+                    self.monitorTable.reloadData()
                     self.refreshControl.endRefreshing()
                     self.isloading = false
                     
@@ -412,12 +421,12 @@ class mainPageControllerViewController: UIViewController {
                 catch{
                     print("invalid ")
                     self.refreshControl.endRefreshing()
-                    self.isloading = false
+                   
                     
                 }
             case .failure:
                 self.refreshControl.endRefreshing()
-                self.isloading = false
+               
                 print("ERROR")
                 
                 
@@ -569,7 +578,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
             return CGFloat(0.0)
         }
     }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    private func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
    
@@ -587,9 +596,9 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         if self.lock == 1
         {
             self.hideView.isHidden = false
-            UIView.animate(withDuration: 0.6) {
+            /*UIView.animate(withDuration: 0.6) {
                 self.hideView.backgroundColor = UIColor.init(displayP3Red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: CGFloat(0.5))
-            }
+            }*/
         UIView.animate(withDuration: 0.6) {
             
             //self.logTableView.frame.size.width = self.view.frame.width
@@ -659,7 +668,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         
         //print(data)
         
-         var url = "http://72.201.206.220:8000/getClassInfo/"
+         var url = "http://68.225.193.31:8000/getClassInfo/"
         
         Alamofire.request(url, method: .post, parameters: data, encoding: URLEncoding.default).responseJSON { response in
             
@@ -799,7 +808,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         
         var current_status = self.courseStatusList?[indexPath.row] as! String
         if isloading == true
-        {
+        { print("start animation")
             cell1.curStatus.isHidden = true
             
             cell1.courseStatusActivityView.startAnimating()
@@ -807,7 +816,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
             
         }
         else
-        {
+        {  print("stop animation")
             cell1.curStatus.isHidden = false
             cell1.courseStatusActivityView.stopAnimating()
             cell1.courseStatusActivityView.isHidden = true
@@ -871,7 +880,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
         if (editingStyle == .delete) {
             print("delete")
             
-            var url = "http://72.201.206.220:6800/cancel.json"
+            var url = "http://68.225.193.31:6800/cancel.json"
             
             var data = ["project":"seatsfinder","job":self.jobidList![indexPath.row]]
             
@@ -923,7 +932,7 @@ extension mainPageControllerViewController:UITableViewDataSource,UITableViewDele
     }
     func deleteTaskFromFRbase(classID:String,user:String)
     {
-        var url = "http://72.201.206.220:8000/delClass/"
+        var url = "http://68.225.193.31:8000/delClass/"
         
         //var data = ["project":"seatsfinder","job":self.jobidList![indexPath.row]]
         

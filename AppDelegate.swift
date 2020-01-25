@@ -8,11 +8,12 @@
 
 import UIKit
 import CoreData
-import Firebase
+
 import UserNotifications
 import Siren
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
+   
 
     var window: UIWindow?
     
@@ -21,11 +22,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let siren = Siren.shared
         siren.checkVersion(checkType: .immediately)
+         UNUserNotificationCenter.current().delegate = self
         // Override point for customization after application launch.
-        FirebaseApp.configure()
+       
+        
         setUpPushNotification(application: application)
         return true
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler([.alert, .badge, .sound])
+    }
+    
     func setUpPushNotification( application: UIApplication) -> () {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge]) {
             (granted,error) in
