@@ -9,6 +9,7 @@ pod 'Kanna'
 pod 'NVActivityIndicatorView'
 pod 'SwiftyJSON'
 pod 'Siren'
+pod 'Charts'
 # Pods for SeatsFinderBot
 
 

@@ -332,7 +332,8 @@ class overViewController: UITableViewController {
             print(success)
             if success == true
             
-            {
+            {print(url)
+                print(data)
                 Alamofire.request(url!, method: .post, parameters: data, encoding: URLEncoding.default).responseJSON { response in
                     switch response.result {
                     case .success:
@@ -400,10 +401,11 @@ class overViewController: UITableViewController {
                 var json = try JSON(data: response.data!)
                 if(json["result"]=="success"){
                     isExist = "1"
+                    print("not exist")
                     completion?(true)
                 }
                 else
-                {
+                {print(" exist")
                     isExist = "0"
                     completion?(false)
                 }
